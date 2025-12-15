@@ -14,7 +14,7 @@
 </div>
 
 #  วิธี Clone repo
-git clone https://github.com/pakinkantawong/Team6-ENGSE207-Software-Architecture
+`git clone https://github.com/pakinkantawong/Team6-ENGSE207-Software-Architecture`
 
 # วิธี push
 ---

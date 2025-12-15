@@ -13,10 +13,10 @@
 
 </div>
 
-# 1. Clone repo
+#  วิธี Clone repo
 git clone https://github.com/pakinkantawong/Team6-ENGSE207-Software-Architecture
 
-# 2. วิธีการ push
+# วิธี push
 ---
 `git status`
 ---

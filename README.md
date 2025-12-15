@@ -25,3 +25,4 @@ git clone https://github.com/pakinkantawong/Team6-ENGSE207-Software-Architecture
 `git commit -m "อัปเดตไฟล์และโครงสร้างโปรเจกต์"`
 ---
 `git push origin main `
+---

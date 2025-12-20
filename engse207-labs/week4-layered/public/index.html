@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task Board</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header><h1>📋 Task Board</h1></header>
+    
+    <main class="container">
+        <!-- Add Task Form -->
+        <form id="addTaskForm">
+            <input type="text" id="title" placeholder="Task title" required>
+            <textarea id="description" placeholder="Description"></textarea>
+            <select id="status">
+                <option value="TODO">To Do</option>
+                <option value="IN_PROGRESS">In Progress</option>
+                <option value="DONE">Done</option>
+            </select>
+            <button type="submit">Add Task</button>
+        </form>
+        
+        <!-- Tasks List -->
+        <div id="tasksContainer"></div>
+    </main>
+    
+    <script src="app.js"></script>
+</body>
+</html>

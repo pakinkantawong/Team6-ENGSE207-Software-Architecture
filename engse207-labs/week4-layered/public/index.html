@@ -1,29 +1,130 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Board</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header><h1>📋 Task Board</h1></header>
+    <div class="glow blur-a"></div>
+    <div class="glow blur-b"></div>
+
+    <header class="hero">
+        <div class="hero__text">
+            <p class="eyebrow">Layered Architecture • ENGSE207</p>
+            <h1>Task Command Center</h1>
+            <p class="subhead">จัดลิสต์งาน ติดตามสถานะ และอัปเดตได้รวดเร็วในที่เดียว</p>
+            <div class="hero__meta">
+                <span class="pill">Real-time-ish updates</span>
+                <span class="pill pill--accent">SQLite backend</span>
+            </div>
+        </div>
+        <div class="hero__graphic">
+            <div class="pulse"></div>
+            <div class="radar"></div>
+        </div>
+    </header>
     
-    <main class="container">
-        <!-- Add Task Form -->
-        <form id="addTaskForm">
-            <input type="text" id="title" placeholder="Task title" required>
-            <textarea id="description" placeholder="Description"></textarea>
-            <select id="status">
-                <option value="TODO">To Do</option>
-                <option value="IN_PROGRESS">In Progress</option>
-                <option value="DONE">Done</option>
-            </select>
-            <button type="submit">Add Task</button>
-        </form>
-        
-        <!-- Tasks List -->
-        <div id="tasksContainer"></div>
+    <main class="shell">
+        <section class="panel stats">
+            <div class="panel__head">
+                <div>
+                    <p class="eyebrow">ภาพรวม</p>
+                    <h2>สรุปงาน</h2>
+                </div>
+                <button class="ghost" id="refreshBtn">↻ รีเฟรช</button>
+            </div>
+            <div class="stat-grid" id="stats">
+                <div class="stat">
+                    <p class="label">ทั้งหมด</p>
+                    <p class="value" id="statTotal">-</p>
+                </div>
+                <div class="stat">
+                    <p class="label">To Do</p>
+                    <p class="value" id="statTodo">-</p>
+                </div>
+                <div class="stat">
+                    <p class="label">In Progress</p>
+                    <p class="value" id="statInProgress">-</p>
+                </div>
+                <div class="stat">
+                    <p class="label">Done</p>
+                    <p class="value" id="statDone">-</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel form">
+            <div class="panel__head">
+                <div>
+                    <p class="eyebrow">สร้างงาน</p>
+                    <h2>เพิ่มงานใหม่</h2>
+                </div>
+            </div>
+            <form id="addTaskForm" class="stack">
+                <label class="field">
+                    <span>ชื่อเรื่อง</span>
+                    <input type="text" id="title" placeholder="เช่น เตรียมสไลด์นำเสนอ" required>
+                </label>
+                <label class="field">
+                    <span>รายละเอียด</span>
+                    <textarea id="description" placeholder="รายละเอียดเพิ่มเติม"></textarea>
+                </label>
+                <div class="field inline">
+                    <label>
+                        <span>สถานะ</span>
+                        <select id="status">
+                            <option value="TODO">To Do</option>
+                            <option value="IN_PROGRESS">In Progress</option>
+                            <option value="DONE">Done</option>
+                        </select>
+                    </label>
+                    <label>
+                        <span>ความสำคัญ</span>
+                        <select id="priority">
+                            <option value="LOW">Low</option>
+                            <option value="MEDIUM" selected>Medium</option>
+                            <option value="HIGH">High</option>
+                        </select>
+                    </label>
+                </div>
+                <button type="submit" class="primary">➕ เพิ่มงาน</button>
+            </form>
+        </section>
+
+        <section class="panel list">
+            <div class="panel__head">
+                <div>
+                    <p class="eyebrow">บอร์ดงาน</p>
+                    <h2>รายการงาน</h2>
+                </div>
+                <div class="filters">
+                    <select id="filterStatus">
+                        <option value="">ทุกสถานะ</option>
+                        <option value="TODO">To Do</option>
+                        <option value="IN_PROGRESS">In Progress</option>
+                        <option value="DONE">Done</option>
+                    </select>
+                    <select id="filterPriority">
+                        <option value="">ทุกความสำคัญ</option>
+                        <option value="LOW">Low</option>
+                        <option value="MEDIUM">Medium</option>
+                        <option value="HIGH">High</option>
+                    </select>
+                    <input type="search" id="searchBox" placeholder="ค้นหาชื่อหรือรายละเอียด">
+                </div>
+            </div>
+
+            <div id="tasksContainer" class="task-grid"></div>
+        </section>
     </main>
-    
+
+    <div id="toast" class="toast hidden"></div>
+
     <script src="app.js"></script>
 </body>
 </html>

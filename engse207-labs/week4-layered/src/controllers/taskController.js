@@ -66,11 +66,19 @@ class TaskController {
      */
     async createTask(req, res, next) {
         try {
+            if (!req.body) {
+                return res.status(400).json({
+                    success: false,
+                    error: 'ต้องส่งข้อมูลงานใน request body'
+                });
+            }
+
+            const body = req.body || {};
             const taskData = {
-                title: req.body.title,
-                description: req.body.description,
-                status: req.body.status,
-                priority: req.body.priority
+                title: body.title,
+                description: body.description,
+                status: body.status,
+                priority: body.priority
             };
 
             const task = await taskService.createTask(taskData);
@@ -99,7 +107,7 @@ class TaskController {
     async updateTask(req, res, next) {
         try {
             const id = parseInt(req.params.id);
-            
+
             if (isNaN(id)) {
                 return res.status(400).json({
                     success: false,
@@ -107,11 +115,12 @@ class TaskController {
                 });
             }
 
+            const body = req.body || {};
             const updates = {};
-            if (req.body.title !== undefined) updates.title = req.body.title;
-            if (req.body.description !== undefined) updates.description = req.body.description;
-            if (req.body.status !== undefined) updates.status = req.body.status;
-            if (req.body.priority !== undefined) updates.priority = req.body.priority;
+            if (body.title !== undefined) updates.title = body.title;
+            if (body.description !== undefined) updates.description = body.description;
+            if (body.status !== undefined) updates.status = body.status;
+            if (body.priority !== undefined) updates.priority = body.priority;
 
             const task = await taskService.updateTask(id, updates);
             
